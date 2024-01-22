@@ -14,7 +14,7 @@ namespace ConsoleApp1
 
         public async Task Conectar()
         {
-            string url = "https://opentdb.com/api.php?amount=10&category=12&difficulty=medium&type=multiple";
+            string url = "https://opentdb.com/api.php?amount=15&category=11&difficulty=easy&type=multiple";
             HttpClient client = new HttpClient();
 
             HttpResponseMessage response = await client.GetAsync(url);
@@ -30,7 +30,5 @@ namespace ConsoleApp1
                 Console.WriteLine("Error al obtener preguntas");
             }
         }
-
-        
     }
 }

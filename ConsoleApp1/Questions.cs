@@ -16,13 +16,13 @@ namespace ConsoleApp1
         public List<string> incorrect_answers { get; set; }
 
 
-        public List<string> crearOptions()
+        public List<string> CreateOptions()
         {
             List<string> options = new List<string>();
             options.Add(this.correct_answer);
             options.AddRange(this.incorrect_answers);
-            options = options.OrderBy(x => x.Length).ToList();
-
+            //options = options.OrderBy(x => x.Length).ToList(); //Otra opcion
+            options.Sort();//Para que no siempre la correcta sea la 1
             return options;
         }
     }

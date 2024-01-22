@@ -18,43 +18,48 @@ namespace ConsoleApp1
             EndGame();
         }
 
-        void GiveOptions(Questions item)
+        private void GiveOptions(Questions item)
         {
-            foreach (var (index, option) in item.crearOptions().Select((value, index) => (index, value)))
+            foreach (var (index, option) in item.CreateOptions().Select((value, index) => (index, value)))
             {
                 Console.WriteLine($"Opcion {index} : {option}");
             }
-            ReadAnswer(item, item.crearOptions());
+            ReadAnswer(item, item.CreateOptions());
         }
 
         private void ReadAnswer(Questions item, List<string> options)
         {
-            string resp = Console.ReadLine();
-            while (!resp.Any(c => c == '0' || c == '1' || c == '2' || c == '3'))
-            {
-                Console.WriteLine("Formato incorrecto, vuelva a responder \n");
-                resp = Console.ReadLine();
-            }
+            CheckAnswer(item, options[int.Parse(CheckDigit(Console.ReadLine()))]);
+        }
 
-            CheckAnswer(item, options[int.Parse(resp)]);
+        private string CheckDigit(string resp)
+        {
+            if (resp == "0" || resp == "1" || resp == "2" || resp == "3")
+            {
+                return resp;
+            }
+            Console.WriteLine("¡Formato incorrecto! Vuelva a responder \n");
+            resp = Console.ReadLine();
+            return CheckDigit(resp);
         }
 
         private void CheckAnswer(Questions item, string response)
         {
             if (item.correct_answer == response)
             {
-                Console.WriteLine("Correcto, vamos con otra! \n");
+                Console.WriteLine("¡Correcto! ¡Vamos con otra! \n");
                 Score++;
             }
             else
             {
-                Console.WriteLine($"Incorrecto, vamos con otra! \n La correcta era: {item.correct_answer}");
+                Console.WriteLine($"¡Incorrecto!, ¡Vamos con otra! \n La correcta era: {item.correct_answer}");
             }
         }
 
         private void EndGame()
         {
-            Console.WriteLine($"\n\nFin del juego, tu puntaje fue : {Score}\n");
+            Console.WriteLine($"\n\n!!!Fin del juego!!!!!, tu puntaje fue : {Score}\n");
+            Console.ReadKey();
         }
     }
 }
